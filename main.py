@@ -2,6 +2,8 @@ import pygame
 from player import Player
 from logger import log_state
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 def main():
@@ -13,9 +15,14 @@ def main():
     # Groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable,)
 
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
+    asteroid_field = AsteroidField()
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}")
